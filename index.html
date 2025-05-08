@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Сантехника Zucchetti</title>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Raleway', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f8f8f8;
+      color: #333;
+    }
+    header {
+      background: #000;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.5rem;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 1rem;
+      text-decoration: none;
+    }
+    .hero {
+      background: url('https://www.zucchettidesign.it/upload/medialibrary/27a/27af23eb9641a1c26d877e2e9d678d6e.jpg') no-repeat center/cover;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-shadow: 1px 1px 4px #000;
+    }
+    .hero h2 {
+      font-size: 3rem;
+    }
+    .catalog {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .product {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+    }
+    .product img {
+      width: 100%;
+      height: auto;
+    }
+    .product .info {
+      padding: 1rem;
+    }
+    .product h3 {
+      margin: 0 0 0.5rem;
+      font-size: 1.1rem;
+    }
+    .product p {
+      font-size: 0.9rem;
+      margin: 0 0 1rem;
+    }
+    .product button {
+      background: #000;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+    .cart {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background: white;
+      padding: 1rem;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      border-radius: 8px;
+      width: 250px;
+      display: none;
+    }
+    .cart.active {
+      display: block;
+    }
+    .cart h3 {
+      margin-top: 0;
+    }
+    .cart ul {
+      padding: 0;
+      list-style: none;
+    }
+    .cart li {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .cart button {
+      margin-top: 1rem;
+      background: #000;
+      color: white;
+      padding: 0.5rem 1rem;
+      border: none;
+      cursor: pointer;
+    }
+    footer {
+      background: #111;
+      color: #ccc;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Zucchetti Сантехника</h1>
+    <nav>
+      <a href="#catalog">Каталог</a>
+      <a href="#contact">Контакты</a>
+      <a href="#" onclick="toggleCart()">Корзина</a>
+    </nav>
+  </header>
+  <div class="hero">
+    <h2>Коллекция Pan S</h2>
+  </div>
+  <section class="catalog" id="catalog">
+    <div class="product">
+      <img src="https://www.zucchettidesign.it/upload/medialibrary/2d8/2d809f29cbe792f2752d22667d2a2b49.jpg" alt="Смеситель Pan S">
+      <div class="info">
+        <h3>Смеситель Pan S</h3>
+        <p>Органичный дизайн, PVD отделка. Цена по запросу.</p>
+        <button onclick="addToCart('Смеситель Pan S')">Добавить в корзину</button>
+      </div>
+    </div>
+    <div class="product">
+      <img src="https://www.zucchettidesign.it/upload/medialibrary/1b5/1b52e354d4b1bff415f394c62ccfc9fd.jpg" alt="Душевая система Pan S">
+      <div class="info">
+        <h3>Душевая система Pan S</h3>
+        <p>Инновационный дизайн и отделки. Цена по запросу.</p>
+        <button onclick="addToCart('Душевая система Pan S')">Добавить в корзину</button>
+      </div>
+    </div>
+  </section>
+
+  <div class="cart" id="cart">
+    <h3>Ваша корзина</h3>
+    <ul id="cart-items"></ul>
+    <button onclick="submitOrder()">Оформить заказ</button>
+  </div>
+
+  <footer id="contact">
+    <p>Связь: example@email.com | Доставка и установка — по договорённости</p>
+    <p>&copy; 2025 Zucchetti Store</p>
+  </footer>
+
+  <script>
+    const cart = [];
+
+    function addToCart(item) {
+      cart.push(item);
+      updateCart();
+    }
+
+    function updateCart() {
+      const cartList = document.getElementById('cart-items');
+      cartList.innerHTML = '';
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        cartList.appendChild(li);
+      });
+      document.getElementById('cart').classList.add('active');
+    }
+
+    function toggleCart() {
+      document.getElementById('cart').classList.toggle('active');
+    }
+
+    function submitOrder() {
+      alert('Спасибо за заказ! Мы свяжемся с вами для подтверждения.');
+      cart.length = 0;
+      updateCart();
+    }
+  </script>
+</body>
+</html>
